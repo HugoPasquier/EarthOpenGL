@@ -23,10 +23,71 @@ bool Mesh::load(const std::string& filename)
 void Mesh::computeNormals()
 {
   // pass 1: set the normal to 0
-
+  for(Vertex& v : mVertices){
+    v.normal = Vector3f::Zero();
+    v.tangent = Vector3f::Zero();
+    v.bitangent = Vector3f::Zero();
+  }
+    
   // pass 2: compute face normals and accumulate
 
+  for(unsigned int i=0; i<mFaces.size(); i++){
+    
+    const Vector3i& face = mFaces[i];
+    Vertex p0 = mVertices[face.x()];
+    Vertex p1 = mVertices[face.y()];
+    Vertex p2 = mVertices[face.z()];
+    Vector3f q1 = p1.position - p0.position;
+    Vector3f q2 = p2.position - p0.position;
+
+    Vector3f n = q1.cross(q2);
+
+    p0.normal += n;
+    p1.normal += n;
+    p2.normal += n;
+
+    Matrix <float, 3, 2> q1q2;
+    q1q2 << q1.x(), q2.x(),
+         q1.y(), q2.y(),
+         q1.z(), q2.z();
+    float s0 = p0.texcoord.x();
+    float t0 = p0.texcoord.y();
+
+    float s1 = p1.texcoord.x();
+    float t1 = p1.texcoord.y();
+
+    float s2 = p2.texcoord.x();
+    float t2 = p2.texcoord.y();
+
+    Matrix2f tex;
+    tex << s1-s0, s2-s0,
+           t1-t0, t2-t0;
+
+    Matrix<float, 3, 2> TB = q1q2 * tex.inverse();
+    Vector3f T = TB.col(0);
+    Vector3f B = TB.col(1);
+
+    p0.tangent += T;
+    p0.bitangent += B;
+
+    p1.tangent += T;
+    p1.bitangent += B;
+
+    p2.tangent += T;
+    p2.bitangent += B;
+  }
+
   // pass 3: normalize
+
+  for(Vertex& v : mVertices){
+
+    v.tangent = v.tangent - v.normal.dot(v.tangent) * v.normal;
+    v.bitangent = v.bitangent - v.normal.dot(v.bitangent) * v.normal - v.tangent.dot(v.bitangent) * v.tangent/v.tangent.norm();
+
+    v.normal.normalize();
+    v.tangent.normalize();
+    v.bitangent.normalize();
+  }
 }
 
 void Mesh::initVBA()
@@ -102,6 +163,22 @@ void Mesh::draw(const Shader &shd)
     glVertexAttribPointer(texcoord_loc, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),  (void*)(2*sizeof(Vector3f) + sizeof(Vector4f)));
     glEnableVertexAttribArray(texcoord_loc);
   }
+
+  // Tangent
+  int tangent_loc = shd.getAttribLocation("vtx_tangent");
+  if(tangent_loc>=0)
+  {
+    glVertexAttribPointer(tangent_loc, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2*sizeof(Vector3f) + sizeof(Vector4f) + sizeof(Vector2f)));
+    glEnableVertexAttribArray(tangent_loc);
+  }
+
+  // Bitangent
+  int bitangent_loc = shd.getAttribLocation("vtx_bitangent");
+  if(bitangent_loc>=0)
+  {
+    glVertexAttribPointer(bitangent_loc, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3*sizeof(Vector3f) + sizeof(Vector4f) + sizeof(Vector2f)));
+    glEnableVertexAttribArray(bitangent_loc);
+  }
   
 
   // send the geometry
@@ -112,6 +189,10 @@ void Mesh::draw(const Shader &shd)
   
   if(normal_loc>=0) glDisableVertexAttribArray(normal_loc);
   if(color_loc>=0)  glDisableVertexAttribArray(color_loc);
+  if(texcoord_loc>=0) glDisableVertexAttribArray(texcoord_loc);
+  if(tangent_loc>=0) glDisableVertexAttribArray(tangent_loc);
+  if(bitangent_loc>=0) glDisableVertexAttribArray(bitangent_loc);
+  
 
   checkError();
 }

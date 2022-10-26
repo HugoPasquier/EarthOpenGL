@@ -26,6 +26,7 @@ void Viewer::init(int w, int h){
     image = SOIL_load_OGL_texture(DATA_DIR"/textures/earth.jpg", 3, 0, SOIL_FLAG_MIPMAPS);
     image2 = SOIL_load_OGL_texture(DATA_DIR"/textures/earth_clouds.jpg", 3, 0, SOIL_FLAG_MIPMAPS);
     image3 = SOIL_load_OGL_texture(DATA_DIR"/textures/earth_night.jpg", 3, 0, SOIL_FLAG_MIPMAPS);
+    image4 = SOIL_load_OGL_texture(DATA_DIR"/textures/earth_normal.jpg", 3, 0, SOIL_FLAG_MIPMAPS);
 
     glGenSamplers(1, &_samplerId);
 
@@ -81,6 +82,11 @@ void Viewer::drawScene()
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, image3);
     glUniform1i(_shader.getUniformLocation("image3"),2);
+
+    // image 4 (normal map)
+    glActiveTexture(GL_TEXTURE3);
+    glBindTexture(GL_TEXTURE_2D, image4);
+    glUniform1i(_shader.getUniformLocation("image4"),3);
 
     // glBindSampler(2, _samplerId);
     // glSamplerParameteri(_samplerId, _minFilter, _magFilter);

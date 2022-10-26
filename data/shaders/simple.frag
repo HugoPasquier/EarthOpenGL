@@ -4,11 +4,14 @@ in vec3 v_color;
 in vec3 v_normal;
 in vec3 v_view;
 in vec2 texcoord;
+in vec3 v_tangent;
+in vec3 v_bitangent;
 
 uniform vec3 lightDir;
 uniform sampler2D image;
 uniform sampler2D image2;
 uniform sampler2D image3;
+uniform sampler2D image4;
 
 out vec4 out_color;
 
@@ -43,4 +46,18 @@ void main(void) {
   //out_color = vec4(ambient * v_color + blinn(normalize(v_normal),normalize(v_view), lightDir, v_color, spec_color, shininess),1.0);
   //out_color = vec4(texcoord, 0, 1);
   out_color = mix_tex_night;
+
+  // ----------------- Normal Mapping -----------------
+  vec4 texcoord = texcoord(image4, texcoord);
+  vec3 normal_map = normal_mat * (2*textget.xyz - 1);
+  vec3 color_normal = texture(image3, texcoord).xyz;
+
+  vec3 v_n = normalize(v_normal);
+  vec3 v_t = normalize(v_tangent);
+  vec3 v_b = normalize(v_bitangent);
+
+  mat3 tbnMatrix = transpose(mat3(v_t, v_b, v_n));
+
+  out_color = vec4(ambient * color_normal + blinn(normalize(normal_map), tbnMatrix * normalize(v_view), tbnMatrix * lightDir, color_normal, spec_color, shininess),1.0);
+  out_color = vec4(v_t, 1.0);
 }

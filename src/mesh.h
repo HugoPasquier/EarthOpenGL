@@ -53,6 +53,8 @@ protected:
       Vector3f normal;
       Vector4f color;
       Vector2f texcoord;
+      Vector3f tangent;
+      Vector3f bitangent;
     };
 
     /** The list of vertices */
