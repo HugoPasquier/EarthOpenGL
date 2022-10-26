@@ -1,0 +1,28 @@
+
+#pragma once
+
+
+#include <functional>
+
+#include <glbinding/glbinding_api.h>
+
+
+namespace glbinding
+{
+
+
+/**
+*  @brief
+*    The generic pointer to an OpenGL function
+*/
+using ProcAddress = void(*)();
+
+/**
+*  @brief
+*    The signature for the getProcAddress function
+*/
+//using GetProcAddress = std::function<ProcAddress(const char*)>;
+using GetProcAddress = ProcAddress(*)(const char*);
+
+
+} // namespace glbinding

@@ -1,0 +1,181 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						3,
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "ext/glfw",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-ext.glfw-Release-0a2f227a9502da977d4e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "ext/glfw"
+				},
+				{
+					"build" : "ext/glfw/src",
+					"jsonFile" : "directory-ext.glfw.src-Release-b29d94a0c430129d0f31.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8.12"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "ext/glfw/src",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "ext/glbinding",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-ext.glbinding-Release-5fd8710aafb536cbf452.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "ext/glbinding",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "ext/SOIL",
+					"jsonFile" : "directory-ext.SOIL-Release-316ea7aac1a6e5a2584c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.6"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "ext/SOIL",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						3
+					],
+					"name" : "EarthOpenGL",
+					"targetIndexes" : 
+					[
+						0,
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1,
+						2
+					],
+					"name" : "GLFW",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "SOIL",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "EartchOpenGL_viewer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-EartchOpenGL_viewer-Release-69871d2238b67d58b8ce.json",
+					"name" : "EartchOpenGL_viewer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "SOIL::@2b1ab7ebf80ea67bd52a",
+					"jsonFile" : "target-SOIL-Release-a202ffa69e801d9fa87d.json",
+					"name" : "SOIL",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "glbinding::@77910e213d085928b44c",
+					"jsonFile" : "target-glbinding-Release-2fc49d8f809b5aac30f7.json",
+					"name" : "glbinding",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glfw::@f6f7721c76705297a9b5",
+					"jsonFile" : "target-glfw-Release-8d5b89349cf4444ec8d8.json",
+					"name" : "glfw",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/hugop/OneDrive/Documents/02 - Gamagora/03 - Synthese d'images - Shading/mds3d_td6/build",
+		"source" : "C:/Users/hugop/OneDrive/Documents/02 - Gamagora/03 - Synthese d'images - Shading/mds3d_td6"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

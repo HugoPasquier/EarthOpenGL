@@ -1,0 +1,101 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"ext/glbinding/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 542,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 550,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 556,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 562,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "dev",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"ext/glbinding/libglbinding.a"
+			],
+			"targetId" : "glbinding::@77910e213d085928b44c",
+			"targetIndex" : 2,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "dev",
+			"destination" : "include",
+			"paths" : 
+			[
+				"ext/glbinding/include/glbinding"
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "dev",
+			"destination" : "include",
+			"paths" : 
+			[
+				"build/ext/glbinding/include/glbinding"
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "dev",
+			"destination" : "cmake/glbinding",
+			"exportName" : "glbinding-export",
+			"exportTargets" : 
+			[
+				{
+					"id" : "glbinding::@77910e213d085928b44c",
+					"index" : 2
+				}
+			],
+			"paths" : 
+			[
+				"ext/glbinding/CMakeFiles/Export/f473b216154f25ab91c4d3a8dc272858/glbinding-export.cmake"
+			],
+			"type" : "export"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "ext/glbinding",
+		"source" : "ext/glbinding"
+	}
+}
