@@ -17,4 +17,4 @@ This project is based on the course of Pierre Benard and Gaël Guennebaud, call 
 ![alt text](images/Mix_nuage_.png "Earth with clouds")
 ![alt text](images/Simulation_soleil.png "Earth with sun simulation")
 ![alt text](images/Mix_nuage_nuit.png "Earth with clouds and night")
-![alt text](images/Normal.png "Earth with normal map")
+![alt text](images/Normal_mapping.png "Earth with normal map")
