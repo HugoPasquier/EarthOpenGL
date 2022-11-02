@@ -13,6 +13,8 @@ uniform sampler2D image2;
 uniform sampler2D image3;
 uniform sampler2D image4;
 
+uniform mat3 normal_mat;
+
 out vec4 out_color;
 
 vec3 blinn(vec3 n, vec3 v, vec3 l, vec3 dCol, vec3 sCol, float s)
@@ -41,16 +43,16 @@ vec4 mix_tex_night = mix(
 
 void main(void) {
   float ambient = 0.0;
-  float shininess = 50;
+  float shininess = 20;
   vec3 spec_color = vec3(1,1,1);
   //out_color = vec4(ambient * v_color + blinn(normalize(v_normal),normalize(v_view), lightDir, v_color, spec_color, shininess),1.0);
   //out_color = vec4(texcoord, 0, 1);
-  out_color = mix_tex_night;
+  //out_color = mix_tex_night;
 
   // ----------------- Normal Mapping -----------------
-  vec4 texcoord = texcoord(image4, texcoord);
-  vec3 normal_map = normal_mat * (2*textget.xyz - 1);
-  vec3 color_normal = texture(image3, texcoord).xyz;
+  vec4 texNormal = texture(image4, texcoord);
+  vec3 normal_map = normal_mat * (2*texNormal.xyz - 1);
+  vec3 color_normal = mix_tex_night.xyz;
 
   vec3 v_n = normalize(v_normal);
   vec3 v_t = normalize(v_tangent);
@@ -58,6 +60,6 @@ void main(void) {
 
   mat3 tbnMatrix = transpose(mat3(v_t, v_b, v_n));
 
-  out_color = vec4(ambient * color_normal + blinn(normalize(normal_map), tbnMatrix * normalize(v_view), tbnMatrix * lightDir, color_normal, spec_color, shininess),1.0);
-  out_color = vec4(v_t, 1.0);
+  out_color = vec4(ambient * color_normal + blinn(normalize(normal_map), normalize(v_view),  lightDir, color_normal, spec_color, shininess),1.0);
+  //out_color = vec4(v_t, 1.0);
 }

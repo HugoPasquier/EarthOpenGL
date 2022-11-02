@@ -33,6 +33,7 @@ public:
     GLuint image;
     GLuint image2;
     GLuint image3;
+    GLuint image4;
 
 private:
     int _winWidth, _winHeight;
